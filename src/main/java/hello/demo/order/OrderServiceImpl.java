@@ -16,15 +16,15 @@ public class OrderServiceImpl implements OrderService {
         return memberRepository;
     }
 
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(final MemberRepository memberRepository, final DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
 
     @Override
-    public Order createOrder(Long memberId, String itemName, int itemPrice) {
+    public Order createOrder(final Long memberId, final String itemName, final int itemPrice) {
         Member member = memberRepository.findById(memberId);
-        int discountPrice = discountPolicy.discount(member, itemPrice);
+        final int discountPrice = discountPolicy.discount(member, itemPrice);
 
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }
