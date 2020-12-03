@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *  @Entity => DB 테이블명과 동일함을 의미한다
@@ -35,5 +36,9 @@ public class User {
     private LocalDateTime updatedAt;
 
     private String updatedBy;
+    
+    // User : OrderDetail = 1 : N
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user") // mappedBy는 OrderDetail에 있는 user 변수와 동일해야함
+    private List<OrderDetail> orderDetailList;
 
 }

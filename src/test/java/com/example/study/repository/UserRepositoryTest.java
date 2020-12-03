@@ -1,6 +1,7 @@
 package com.example.study.repository;
 
 import com.example.study.StudyApplication;
+import com.example.study.model.entity.Item;
 import com.example.study.model.entity.User;
 import com.example.study.respository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,16 +42,22 @@ public class UserRepositoryTest {
         User newUser = userRepository.save(user);
         System.out.println("newUser = " + newUser);
         System.out.println(newUser.getId());
-
     }
 
     @Test
+    @Transactional
     public void read() {
-        Optional<User> user = userRepository.findById(6L);
+
+        // select * from user where id = ?
+        Optional<User> user = userRepository.findByAccount("TestUser03");
 
         user.ifPresent(selectUser ->{
-            System.out.println("selectUser = " + selectUser);
-            System.out.println("email: " + selectUser.getEmail());
+            selectUser.getOrderDetailList()
+                    .stream()
+                    .forEach(detail -> {
+                        Item item = detail.getItem();
+                        System.out.println("item = " + item);
+             });
         });
 
         //return user.get();
