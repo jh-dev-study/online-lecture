@@ -24,10 +24,18 @@ public class User {
 
     private String account;
 
+    private String password;
+
+    private String status;
+
     private String email;
 
     // DB는 phone_number 와 같이 스네이크 케이스인데, JPA는 해당 부분의 네이밍을 자동으로 설정해준다.
     private String phoneNumber;
+
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime unregisteredAt;
 
     private LocalDateTime createdAt;
 
@@ -38,7 +46,7 @@ public class User {
     private String updatedBy;
     
     // User : OrderDetail = 1 : N
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user") // mappedBy는 OrderDetail에 있는 user 변수와 동일해야함
-    private List<OrderDetail> orderDetailList;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user") // mappedBy는 OrderDetail에 있는 user 변수와 동일해야함
+//    private List<OrderDetail> orderDetailList;
 
 }
