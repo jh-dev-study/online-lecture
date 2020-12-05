@@ -1,7 +1,7 @@
 package com.example.study.repository;
 
-import com.example.study.model.entity.OrderDetail;
-import com.example.study.respository.OrderDetailRepository;
+import com.example.study.model.entity.AdminUser;
+import com.example.study.respository.AdminUserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,25 +18,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)  // 실제 DB 사용
 @DisplayName("ItemRepository 테스트")
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
-public class OrderDetailRepositoryTest {
+public class AdminUserRepositoryTest {
 
     @Autowired
-    private OrderDetailRepository orderDetailRepository;
+    private AdminUserRepository adminUserRepository;
 
     @Test
     public void create() {
-        OrderDetail orderDetail = new OrderDetail();
+        AdminUser adminUser = new AdminUser();
+        adminUser.setAccount("AdminUser01");
+        adminUser.setPassword("AdminUser01");
+        adminUser.setStatus("REGISTERED");
+        adminUser.setRole("PARTNER");
+        adminUser.setCreatedAt(LocalDateTime.now());
+        adminUser.setCreatedBy("AdminServer");
 
-        orderDetail.setStatus("WAITING");
-        orderDetail.setArrivalDate(LocalDateTime.now().plusDays(2));
-        orderDetail.setQuantity(1);
-        orderDetail.setTotalPrice(BigDecimal.valueOf(900000));
-        orderDetail.setOrderGroupId(1L);  // 어떠한 장바구니에
-        orderDetail.setItemId(1L);        // 어떠한 상품
-        orderDetail.setCreatedAt(LocalDateTime.now());
-        orderDetail.setCreatedBy("AdminServer");
+        AdminUser newAdminUser = new AdminUser();
 
-        OrderDetail newOrderDetail = orderDetailRepository.save(orderDetail);
-        assertThat(newOrderDetail).isNotNull();
+        assertThat(newAdminUser).isNotNull();
     }
 }

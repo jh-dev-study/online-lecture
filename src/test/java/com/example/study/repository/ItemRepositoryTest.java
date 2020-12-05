@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,9 +27,17 @@ public class ItemRepositoryTest {
     @Test
     public void create() {
         Item item = new Item();
-        item.setName("노트북");
-        item.setPrice(100000);
-        item.setContent("삼성 노트북");
+        item.setStatus("UNREGISTERED");
+        item.setName("삼성 노트북");
+        item.setTitle("삼성 노트북 A100");
+        item.setContent("2020년형 노트북");
+        item.setPrice(900000);
+        item.setBrandName("삼성");
+        item.setRegisteredAt(LocalDateTime.now());
+        item.setCreatedAt(LocalDateTime.now());
+        item.setCreatedBy("Partner01");
+        item.setPartnerId(1L);
+
         Item newItem = itemRepository.save(item);
 
         assertThat(newItem).isEqualTo(item);
