@@ -1,5 +1,7 @@
 package com.example.study.repository;
 
+import com.example.study.component.LoginUserAuditorAware;
+import com.example.study.config.JpaConfig;
 import com.example.study.model.entity.OrderGroup;
 import com.example.study.respository.OrderGroupRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)  // 실제 DB 사용
 @DisplayName("ItemRepository 테스트")
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
+@Import({JpaConfig.class, LoginUserAuditorAware.class})
 public class OrderGroupRepositoryTest {
 
     @Autowired
@@ -38,7 +42,7 @@ public class OrderGroupRepositoryTest {
         orderGroup.setArrivalDate(LocalDateTime.now());
         orderGroup.setCreatedAt(LocalDateTime.now());
         orderGroup.setCreatedBy("AdminServer");
-        orderGroup.setUserId(1L);
+//        orderGroup.setUserId(1L);   // -> User
 
         OrderGroup newOrderGroup = orderGroupRepository.save(orderGroup);
 

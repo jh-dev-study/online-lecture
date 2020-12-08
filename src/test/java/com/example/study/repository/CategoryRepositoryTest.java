@@ -1,5 +1,7 @@
 package com.example.study.repository;
 
+import com.example.study.component.LoginUserAuditorAware;
+import com.example.study.config.JpaConfig;
 import com.example.study.model.entity.Category;
 import com.example.study.respository.CategoryRepository;
 import org.assertj.core.api.Assert;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)  // 실제 DB 사용
 @DisplayName("CategoryRepository 테스트")
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
+@Import({JpaConfig.class, LoginUserAuditorAware.class})
 public class CategoryRepositoryTest {
 
     @Autowired

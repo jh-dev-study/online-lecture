@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> { // Long => User 클래스에서식별자인 id 타입
 
+    User findFirstByPhoneNumberOrderByIdDesc(String phoneNumber);
 
 }

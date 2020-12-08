@@ -1,5 +1,7 @@
 package com.example.study.repository;
 
+import com.example.study.component.LoginUserAuditorAware;
+import com.example.study.config.JpaConfig;
 import com.example.study.model.entity.OrderDetail;
 import com.example.study.respository.OrderDetailRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)  // 실제 DB 사용
 @DisplayName("ItemRepository 테스트")
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
+@Import({JpaConfig.class, LoginUserAuditorAware.class})
 public class OrderDetailRepositoryTest {
 
     @Autowired
@@ -32,8 +36,8 @@ public class OrderDetailRepositoryTest {
         orderDetail.setArrivalDate(LocalDateTime.now().plusDays(2));
         orderDetail.setQuantity(1);
         orderDetail.setTotalPrice(BigDecimal.valueOf(900000));
-        orderDetail.setOrderGroupId(1L);  // 어떠한 장바구니에
-        orderDetail.setItemId(1L);        // 어떠한 상품
+       // orderDetail.setOrderGroupId(1L);  // Long -> OrderGroup 어떠한 장바구니에
+        //orderDetail.setItemId(1L);        // 어떠한 상품
         orderDetail.setCreatedAt(LocalDateTime.now());
         orderDetail.setCreatedBy("AdminServer");
 

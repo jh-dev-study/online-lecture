@@ -1,8 +1,12 @@
 package com.example.study.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +16,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+@Builder
+@Accessors(chain = true)
+@ToString(exclude = {"orderDetailList", "partner"})
 public class Item {
 
     @Id
@@ -34,13 +42,25 @@ public class Item {
 
     private LocalDateTime unregisteredAt;
 
+    @CreatedDate
     private LocalDateTime createdAt;
 
+    @CreatedBy
     private String createdBy;
 
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @LastModifiedBy
     public String updatedBy;
+
+    // Item N : 1 Partner
+    @ManyToOne
+    private Partner partner;
+
+    // Item 1 : N OrderDetail
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
+    private List<OrderDetail> orderDetailList;
 
     // LAZY = 지연로딩, EAGER = 즉시로딩(연관관계가 설정된 모든 테이블이 Join - 성능저하..)
     // EAGER = 1:1, 연관관계에 있어 한건이 존재할 때 추천
@@ -48,7 +68,4 @@ public class Item {
     // user_id = order_detail.user_id
     // where item.id = ?
 
-    // Item : OrderDetail = 1 : N
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "item") // OrderDetail에 item 변수에 매핑
-    private List<OrderDetail> orderDetailList;
 }
