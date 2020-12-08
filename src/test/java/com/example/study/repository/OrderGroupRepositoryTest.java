@@ -40,8 +40,10 @@ public class OrderGroupRepositoryTest {
         orderGroup.setTotalQuantity(1);
         orderGroup.setOrderAt(LocalDateTime.now().minusDays(2));
         orderGroup.setArrivalDate(LocalDateTime.now());
-        orderGroup.setCreatedAt(LocalDateTime.now());
-        orderGroup.setCreatedBy("AdminServer");
+
+        /* LoginUserAuditorAware 적용으로 인한 자동 createAt, createdBy 설정 */
+//        orderGroup.setCreatedAt(LocalDateTime.now());
+//        orderGroup.setCreatedBy("AdminServer");
 //        orderGroup.setUserId(1L);   // -> User
 
         OrderGroup newOrderGroup = orderGroupRepository.save(orderGroup);

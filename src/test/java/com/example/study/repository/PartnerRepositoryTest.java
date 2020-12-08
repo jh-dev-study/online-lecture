@@ -49,8 +49,10 @@ public class PartnerRepositoryTest {
         partner.setBusinessNumber(businessNumber);
         partner.setCeoName(ceoName);
         partner.setRegisteredAt(registeredAt);
-        partner.setCreatedAt(createdAt);
-        partner.setCreatedBy(createdBy);
+
+        /* LoginUserAuditorAware 적용으로 인한 자동 createAt, createdBy 설정 */
+//        partner.setCreatedAt(createdAt);
+//        partner.setCreatedBy(createdBy);
         //partner.setCategoryId(categoryId);
 
         Partner newPartner = partnerRepository.save(partner);

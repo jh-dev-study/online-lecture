@@ -38,8 +38,10 @@ public class OrderDetailRepositoryTest {
         orderDetail.setTotalPrice(BigDecimal.valueOf(900000));
        // orderDetail.setOrderGroupId(1L);  // Long -> OrderGroup 어떠한 장바구니에
         //orderDetail.setItemId(1L);        // 어떠한 상품
-        orderDetail.setCreatedAt(LocalDateTime.now());
-        orderDetail.setCreatedBy("AdminServer");
+
+        /* LoginUserAuditorAware 적용으로 인한 자동 createAt, createdBy 설정 */
+//        orderDetail.setCreatedAt(LocalDateTime.now());
+//        orderDetail.setCreatedBy("AdminServer");
 
         OrderDetail newOrderDetail = orderDetailRepository.save(orderDetail);
         assertThat(newOrderDetail).isNotNull();

@@ -39,8 +39,10 @@ public class UserRepositoryTest {
         String email = "Test01@gmail.com";
         String phoneNumber = "010-1111-3333";
         LocalDateTime registeredAt = LocalDateTime.now();
-        LocalDateTime createdAt = LocalDateTime.now();
-        String createdBy = "AdminServer";
+
+        /* LoginUserAuditorAware 적용으로 인한 자동 createAt, createdBy 설정 */
+//        LocalDateTime createdAt = LocalDateTime.now();
+//        String createdBy = "AdminServer";
 
         User user = new User();
         user.setAccount(account);

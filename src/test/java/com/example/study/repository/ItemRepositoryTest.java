@@ -38,8 +38,10 @@ public class ItemRepositoryTest {
         item.setPrice(900000);
         item.setBrandName("삼성");
         item.setRegisteredAt(LocalDateTime.now());
-        item.setCreatedAt(LocalDateTime.now());
-        item.setCreatedBy("Partner01");
+
+        /* LoginUserAuditorAware 적용으로 인한 자동 createAt, createdBy 설정 */
+//        item.setCreatedAt(LocalDateTime.now());
+//        item.setCreatedBy("Partner01");
         //item.setPartnerId(1L);
 
         Item newItem = itemRepository.save(item);
