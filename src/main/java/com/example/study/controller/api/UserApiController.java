@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
 
-    private UserApiLogicService userApiLogicService;
+    private final UserApiLogicService userApiLogicService;
 
     public UserApiController(UserApiLogicService userApiLogicService) {
         this.userApiLogicService = userApiLogicService;
@@ -29,7 +29,8 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
     @Override
     @GetMapping("{id}")     // /api/user/{id}
     public Header<UserApiResponse> read(@PathVariable(name = "id") Long id) {
-        return null;
+        log.info("read id : {}", id);
+        return userApiLogicService.read(id);
     }
 
     @Override
