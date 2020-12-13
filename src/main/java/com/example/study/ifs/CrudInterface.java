@@ -6,7 +6,7 @@ import com.example.study.model.network.Header;
 public interface CrudInterface<Req, Res> {
 
     // TODO request object 추가
-    Header<Res> create(Header<Req> userApiRequest);
+    Header<Res> create(Header<Req> request);
 
     Header<Res> read(Long id);
 
