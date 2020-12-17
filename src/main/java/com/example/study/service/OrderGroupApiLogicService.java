@@ -1,30 +1,23 @@
 package com.example.study.service;
 
-import com.example.study.ifs.CrudInterface;
 import com.example.study.model.entity.OrderGroup;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.OrderGroupApiRequest;
 import com.example.study.model.network.response.OrderGroupApiResponse;
-import com.example.study.respository.OrderGroupRepository;
 import com.example.study.respository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
-public class OrderGroupApiLogicService implements
-        CrudInterface<OrderGroupApiRequest, OrderGroupApiResponse> {
+public class OrderGroupApiLogicService
+        extends BaseService<OrderGroupApiRequest, OrderGroupApiResponse, OrderGroup> {
 
-    private final OrderGroupRepository orderGroupRepository;
     private final UserRepository userRepository;
 
-    public OrderGroupApiLogicService(
-            final OrderGroupRepository orderGroupRepository,
-            final UserRepository userRepository) {
-        this.orderGroupRepository = orderGroupRepository;
+    public OrderGroupApiLogicService(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     @Override
     public Header<OrderGroupApiResponse> create(Header<OrderGroupApiRequest> request) {
@@ -43,7 +36,7 @@ public class OrderGroupApiLogicService implements
                 .user(userRepository.getOne(body.getUserId()))
                 .build();
 
-        OrderGroup newOrderGroup = orderGroupRepository.save(orderGroup);
+        OrderGroup newOrderGroup = baseRepository.save(orderGroup);
 
         return response(newOrderGroup);
     }
@@ -51,7 +44,7 @@ public class OrderGroupApiLogicService implements
     @Override
     public Header<OrderGroupApiResponse> read(Long id) {
 
-        return orderGroupRepository.findById(id)
+        return baseRepository.findById(id)
                 .map(this::response)
                 .orElseGet(() -> Header.ERROR("데이터 없음"));
     }
@@ -61,7 +54,7 @@ public class OrderGroupApiLogicService implements
 
         OrderGroupApiRequest body = request.getData();
 
-        return orderGroupRepository.findById(body.getId())
+        return baseRepository.findById(body.getId())
                 .map(orderGroup -> {
                     orderGroup
                             .setStatus(body.getStatus())
@@ -76,16 +69,16 @@ public class OrderGroupApiLogicService implements
                             .setUser(userRepository.getOne(body.getUserId()));
                     return orderGroup;
                 })
-                .map(changeOrderGroup -> orderGroupRepository.save(changeOrderGroup))
+                .map(changeOrderGroup -> baseRepository.save(changeOrderGroup))
                 .map(this::response)
                 .orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
     @Override
     public Header delete(Long id) {
-        return orderGroupRepository.findById(id)
+        return baseRepository.findById(id)
                 .map(orderGroup -> {
-                    orderGroupRepository.delete(orderGroup);
+                    baseRepository.delete(orderGroup);
                     return Header.OK();
                 })
                 .orElseGet(() -> Header.ERROR("데이터 없음"));

@@ -1,6 +1,7 @@
 package com.example.study.controller.api;
 
 import com.example.study.controller.CrudController;
+import com.example.study.model.entity.OrderGroup;
 import com.example.study.model.network.request.OrderGroupApiRequest;
 import com.example.study.model.network.response.OrderGroupApiResponse;
 import com.example.study.service.OrderGroupApiLogicService;
@@ -11,18 +12,18 @@ import javax.annotation.PostConstruct;
 @RestController
 @RequestMapping("/api/orderGroup")
 public class OrderGroupApiController extends
-        CrudController<OrderGroupApiRequest, OrderGroupApiResponse> {
+        CrudController<OrderGroupApiRequest, OrderGroupApiResponse, OrderGroup> {
 
-    private final OrderGroupApiLogicService orderGroupApiLogicService;
-
-    public OrderGroupApiController(OrderGroupApiLogicService orderGroupApiLogicService) {
-        this.orderGroupApiLogicService = orderGroupApiLogicService;
-    }
-
-    @PostConstruct
-    public void init() {
-        this.baseService = orderGroupApiLogicService;
-    }
+//    private final OrderGroupApiLogicService orderGroupApiLogicService;
+//
+//    public OrderGroupApiController(OrderGroupApiLogicService orderGroupApiLogicService) {
+//        this.orderGroupApiLogicService = orderGroupApiLogicService;
+//    }
+//
+//    @PostConstruct
+//    public void init() {
+//        this.baseService = orderGroupApiLogicService;
+//    }
 
 //    @Override
 //    @PostMapping("")
