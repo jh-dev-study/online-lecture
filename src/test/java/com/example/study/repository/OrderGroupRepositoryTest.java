@@ -32,7 +32,6 @@ public class OrderGroupRepositoryTest {
     public void create() {
         OrderGroup orderGroup = new OrderGroup();
         orderGroup.setStatus("COMPLETE");
-        orderGroup.setOrderType("ALL");
         orderGroup.setRevAddress("서울시 강남구 역삼동");
         orderGroup.setRevName("홍길동");
         orderGroup.setPaymentType("CARD");

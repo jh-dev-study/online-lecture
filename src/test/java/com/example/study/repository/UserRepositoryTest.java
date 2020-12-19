@@ -3,6 +3,7 @@ package com.example.study.repository;
 import com.example.study.component.LoginUserAuditorAware;
 import com.example.study.config.JpaConfig;
 import com.example.study.model.entity.User;
+import com.example.study.model.enumclass.UserStatus;
 import com.example.study.respository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +35,7 @@ public class UserRepositoryTest {
     public void create() {
         String account = "Test03";
         String password = "Test03";
-        String status = "REGISTERED";
+        UserStatus status = UserStatus.REGISTERED;
         String email = "Test01@gmail.com";
         String phoneNumber = "010-1111-3333";
         LocalDateTime registeredAt = LocalDateTime.now();
@@ -76,7 +76,7 @@ public class UserRepositoryTest {
         // Accessors chain-true 속성
         user.setEmail("")
                 .setPhoneNumber("")
-                .setStatus("")
+                .setStatus(UserStatus.REGISTERED)
                 .setEmail("");
 
         user.getOrderGroupList().stream().forEach(orderGroup -> {
