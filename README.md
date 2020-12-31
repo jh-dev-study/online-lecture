@@ -8,9 +8,6 @@
     
 
 ### **요즘많이 쓴다던데?** 도커 명령어나 좀 알아볼까? NO!
-<div align=center>
-<img width="256" alt="docker" src="https://user-images.githubusercontent.com/50076031/103396386-56d5ac00-4b76-11eb-90e8-6e7b88aa4bfd.PNG">
-</div>
   - 단순 도커의 사용법을 익히기 전에 어떤 문제를 어떻게 해결했는지 알아봅니다.
   - 도커는 컨테이너 기반의 오픈소스 가상화 플랫폼
   - 왜 사용하는지 이해한다면, 더 효과적인 합스이 가능
