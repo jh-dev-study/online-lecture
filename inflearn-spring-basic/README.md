@@ -71,8 +71,8 @@
  
  
 ## 관련 로드맵
-<img width="351" alt="인프런 스프링 캡쳐6" src="https://user-images.githubusercontent.com/50076031/101240039-f5195200-372f-11eb-97db-7ce6c92e3337.PNG">
-<img width="362" alt="인프런 스프링 캡쳐7" src="https://user-images.githubusercontent.com/50076031/101240038-f3e82500-372f-11eb-9f2e-c3b58a04f097.PNG">
+<img width="460" alt="인프런 스프링 캡쳐6" src="https://user-images.githubusercontent.com/50076031/101240039-f5195200-372f-11eb-97db-7ce6c92e3337.PNG">
+<img width="520" alt="인프런 스프링 캡쳐7" src="https://user-images.githubusercontent.com/50076031/101240038-f3e82500-372f-11eb-9f2e-c3b58a04f097.PNG">
 
 
 
